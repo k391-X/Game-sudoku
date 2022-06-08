@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+
+<html>
+
+<!--
+			Cặp thẻ html này để viết mã html bên trong. 
+			Các loại ngôn ngữ khác trong cặp thẻ này phần lớn sẽ bị lỗi cú pháp
+-->
+
+<head>
+<!--
+			Phần tử <head> là một khung chứa siêu dữ liệu - metadata (dữ liệu về dữ liệu).
+			HTML metadata là dữ liệu về tài liệu HTML Metadata không được hiển thị.
+			Metadata thường xác định title, styles, links, scripts, của tài liệu và thông tin meta khác.
+			Các thẻ sau mô tả metadata: <title>, <style>, <meta>, <script>, và <base>.
+-->
+
+
+    <meta charset="UTF-8">
+	<!--
+			Để nội dung trang HTML hiển thị đúng quy cách, 
+			trình duyệt web cần phải biết sử dụng bộ mã hóa ký tự nào. 
+			Để có thể xác định bộ việc trình duyệt hiển thị trang HTML 
+			bằng bộ ký tự nào, bạn sẽ cần xác định qua thẻ meta charset.
+
+
+			Định nghĩa chính xác hơn, UTF- 8 là một bộ mã hóa các ngôn ngữ
+			về một chuẩn chung. Và UTF-8 được hiểu là một kiểu mã hóa ký tự 
+			của Unicode. Trong đó, Unicode là bảng mã chứa gần như toàn bộ 
+			các kí tự của hầu hết các ngôn ngữ trên toàn cầu.
+	
+			UTF-8 được thiết kế để tương thích ngược với chuẩn mã hóa ASCII*. 
+			Đồng thời, tránh những nhược điểm của UTF-16 và UTF-32. 
+			Hiện tại, UTF-8 đã trở thành kiểu mã hóa phổ biến nhất. 
+			Bằng chứng là hơn một nửa số trang web hiện tại sử dụng kiểu mã hóa UTF-8.
+	-->
+	
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--  
+			Khi bắt đầu một dự án thiết kế website, thiết kế website responsive là 
+			một trong những điều cần xem xét đầu tiên. Và Meta Viewport 
+			là thứ quan trọng, biến một website thông thường thành một website responsive.
+			
+			Meta Viewport là một thẻ được đặt ở phần <head> của HTML, cho trình duyệt biết website sẽ được hiển thị thế nào.
+
+			Viewport là khu vực hiển thị nội dung mà người dùng nhìn 
+			thấy trên website (có thể hiểu là khung nhìn). Viewport sẽ thay 
+			đổi theo thiết bị, viewport trên điện thoại di động sẽ nhỏ hơn so 
+			với trên màn hình máy tính.
+
+			Viewport không chính xác sẽ khiến người dùng phải cuộn ngang trong 
+			khi duyệt web (nội dung tràn màn hình) thay vì website sẽ hiện thị 
+			hoàn hảo trên màn hình thiết bị của họ. Thông qua thẻ <meta>, 
+			các nhà thiết kế website có thể kiểm soát chế độ xem (kiểm soát 
+			kích thước và tỷ lệ của trang web).
+				
+			width. Đặt chiều rộng cho khung nhìn (viewport) nó có thể là một giá trị tuyệt đối (pixel, cm, pt,…) hoặc một giá trị tương đối (hay đáp ứng) như “device-width” (chiều rộng thiết bị).
+			
+			initial-scale. Đặt giá trị phóng đại khung nhìn đầu tiên của người dùng, thường là “1”. Bạn cũng có thể thay đổi thành một giá trị khác (không khuyến khích thay đổi).
+	-->
+    <title>Sudokuuu</title>
+	<!-- 
+			Đặt tiêu đề cho trang web. Tiêu đề hiển thị ở các tab web.	
+	-->
+	
+    <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+	<!--
+			Link lấy CDN VueJS.CDN là viết tắt của Content Delivery Network - mạng phân phối nội dung hiểu nôm na là các file dữ liệu sẽ được đưa lên các server trên toàn cầu và khi bạn yêu cầu file này, hệ thống mạng sẽ tính toán để chọn ra server cung cấp file gần bạn nhất, giúp cho việc tải file cực nhanh. Framework Vue.js hiện có trên rất nhiều các dịch vụ CDN khác nhau
+	-->
+	
+    <link href="style.css" rel="stylesheet" />
+    <!-- 
+			chèn link Css để chỉnh sửa ngoại hình trang 
+	-->
+	
+	<link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet" />
+    <!--
+			Lấy font chữ từ kho chung trên mạng	
+	-->
+	
+	
+	<link rel="image_src" href="thumb.jpg" />
+	<!--
+			Chèn ảnh vào project 
+	-->
+	
+</head>
+
+<body>
+<!-- 
+		Cặp thẻ body : cặp thẻ dùng để đóng gói tất cả các nội dung sẽ hiển thị trên trang
+-->
+    <header>
+	<!--
+			Cặp thẻ header 
+	-->
+        <a href="https://www.facebook.com/thangg.tl" target="_blank">Created by TL</a>
+        <h1>Sudoku</h1>
+    </header>
+    <div id="app-sudoku">
+        <button v-if="isNewGame" class="button mt-20" v-on:click="initializeGame('3')"><span>Ez</span></button>
+
+        <button v-if="isNewGame" class="button mt-20" v-on:click="initializeGame('4')"><span>Normal</span></button>
+
+        <button v-if="isNewGame" class="button mt-20" v-on:click="initializeGame('5')"><span>Hard</span></button>
+
+        <button v-if="isNewGame" class="button mt-20" v-on:click="initializeGame('6')"><span>Hard as
+                fu**</span></button>
+
+        <button class="button mt-20" v-on:click="restart()" v-if=" isGameStarted">
+            <span>New Game</span>
+        </button>
+
+        <button class="button" v-on:click="evaluateGame()" v-if="isGameStarted"><span>Verify</span></button>
+
+        <div v-if="showAnswer" class="answer">
+            <img v-bind:src="answerImage" class="answer-image" />
+        </div>
+
+        <div class="grid-sudoku" v-if="isGameStarted && !showAnswer">
+            <div v-for="(row, indexRow) in sudokuMatrix" class="grid-row">
+                <div v-for="(cell, indexCell) in row" class="grid-cell">
+                    <input pattern="\d*" type="text" v-bind:key="cell.num" v-model="cell.num"
+                        @change="formatCell(indexRow, indexCell)" @keypress="onlyNumber" class="grid-cell-editor"
+                        :class="{'blue': cell.readOnly}" :readonly="cell.readOnly" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="sudoku.js"></script>
+</body>
+
+</html>
