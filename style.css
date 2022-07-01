@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+/* toan bo trang deu duoc can chinh */
+/* padding la khoang trong giua noi dung va vien */
+/* margin la khoang trong giua vien va phan tu tiep theo  */
+
 
 input:focus,
 select:focus,
@@ -9,13 +13,14 @@ textarea:focus,
 button:focus {
     outline: none;
 }
-
+/* Cac phan tu trong khoi body */
 body {
     display: grid;
     background-color:brown;
     font-family: 'Dosis', sans-serif;
 }
 
+/* Khung chu Sudoku duoc can chinh ra giua man hinh */
 header {
     display: grid;
     color: white;
@@ -24,11 +29,14 @@ header {
     justify-items: center;
 }
 
+/* Tao ra khoang cach giua Sudoku va dong created  Day la dong gioi thieu*/
 header a {
-    color: white;
+    /* color: white; */
+   color:blueviolet;
     padding-bottom: 30px;
 }
 
+/* Khung man hinh tro choi hay cai ma tran sudoku da duoc can ra giua man hinh */
 #app-sudoku {
     place-self: center;
     display: grid;
@@ -41,6 +49,9 @@ header a {
     grid-template-rows: auto auto;
 }
 
+
+/* Cac nut lua chon do kho duoc can chinh deu hon chinh mau nen
+trong to hon co khoang cach voi nhau font chu cung duoc dat moi  */
 .button {
     display: inline-block;
     border-radius: 6px;
@@ -78,31 +89,38 @@ header a {
     padding-right: 25px;
 }
 
-    .button:hover span:after {
-        opacity: 1;
-        right: 0;
-    }
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
 
+/* Bao vien quanh khoi sudoku tro choi 1 vien mau den co do day 3px */
 .grid-sudoku {
     display: table;
     background: white;
     border: 3px solid black;
 }
 
+/* Bao khoi block 3x3 co vien duoi */
 .grid-sudoku > div:nth-child(3), .grid-sudoku > div:nth-child(6) {
     border-bottom: 3px solid black;
 }
 
+/* Bao ben phai cac dong */
 .grid-row > div:nth-child(3), .grid-row > div:nth-child(6) {
     border-right: 3px solid black;
 }
 
+
+/* Hien thi cac o theo dang bang  */
 .grid-cell {
     display: table-cell;
     padding: 10px;
     border: 1px solid gray;
 }
 
+
+/* Thu gon cac o cho dep mat chinh font chu, can chu ra giua bang */
 .grid-cell-editor {
     border: none;
     width: 18px;
@@ -112,6 +130,10 @@ header a {
     text-align: center;
     font-size: 18px;
 }
+
+/* position: absolute  la can chinh vi tri khung answer vi tri tuyet doi theo */
+/* thanh phan bao ngoai hoac it nhat la theo cua so trinh duyet */
+
 
 .answer {
     position: absolute;
@@ -135,8 +157,10 @@ header a {
     opacity: 0;
 }
 
+/* Can mau font chu cac o da dien  */
 .blue {
-    color: rgb(52, 89, 255);
+    /* color: rgb(52, 89, 255); */
+    color:darkgreen ;
 }
 
 .mt-20 {
