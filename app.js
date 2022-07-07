@@ -16,11 +16,7 @@ var sudokuApp = new Vue({
     mounted() {
         // Preload image
         new Image().src = 'fail.gif';
-        new Image().src = 'successEasy.gif';
-        new Image().src = 'successNormal.gif';   
-        new Image().src = 'successHard.gif';
-        new Image().src = 'successDestroy.gif';
-
+        new Image().src = 'success.gif';
     },
 
 	//Bat dau viet ham
@@ -61,14 +57,7 @@ var sudokuApp = new Vue({
             var maxtrixCheck = this.sudokuMatrix.map((x, i) => this.sudokuMatrix[i].map(y => parseInt(y.num)));
 
             if (JSON.stringify(result) == JSON.stringify(maxtrixCheck)) {
-                if ( this.getLevel == 3 )
-                    this.answerImage = "successEasy.gif";
-                else if ( this.getLevel == 4 )
-                    this.answerImage = "successNormal.gif";
-                else if ( this.getLevel == 5 )
-                    this.answerImage = "successHard.gif";
-                else if ( this.getLevel == 6 )
-                   this.answerImage = "successDestroy.gif";
+                   this.answerImage = "success.gif";
 
                 this.showAnswer = true;
                 this.isGameStarted = false;
