@@ -33,13 +33,15 @@ function generate() {
 		sudoku[whatToTry] = attempt;
 	}
 
-	//this to avoid two-way-data-binding in vue
 	result = convertArray(sudoku);
 	sudoku = convertArray(sudoku);
 
-	return result;
+	return {result: result, sudoku: sudoku};
 }
 
+//Ham push la them phan tu vao cuoi mang, unshift la them phan tu vao dau mang, 
+//ham slice la ham lay phan tu bat dau va cuoi cung nhung khong thay doi mang cu ma 
+// tao ra mang moi 
 
 function convertArray(sudoku) {
 	arr = [];
@@ -53,22 +55,21 @@ function convertArray(sudoku) {
 	return arr;
 }
 
-// given a sudoku cell, returns the row //Tim vi tri cua hang khi dua vao vi tri cua o
+//Tim vi tri cua hang khi dua vao vi tri cua o
 function returnRow(cell) {
 	return Math.floor(cell / 9);
 }
 
-// given a sudoku cell, returns the column // Tim vi tri cua cot khi dua vao 1 o
+// Tim vi tri cua cot khi dua vao 1 o
 function returnCol(cell) {
 	return cell % 9;
 }
 
-// given a sudoku cell, returns the 3x3 block // Tra ve vi tri cua khoi khi dua vao 1 o
+// Tra ve vi tri cua khoi khi dua vao 1 o
 function returnBlock(cell) {
 	return Math.floor(returnRow(cell) / 3) * 3 + Math.floor(returnCol(cell) / 3);
 }
 
-// given a number, a row and a sudoku, returns true if the number can be placed in the row
 //Kiem tra so co bi trung trong hang khong
 
 function isPossibleRow(number, row, sudoku) {
@@ -80,7 +81,6 @@ function isPossibleRow(number, row, sudoku) {
 	return true;
 }
 
-// given a number, a column and a sudoku, returns true if the number can be placed in the column
 //Kiem tra so co bi trung trong cot khong
 function isPossibleCol(number, col, sudoku) {
 	for (var i = 0; i <= 8; i++) {
@@ -91,7 +91,6 @@ function isPossibleCol(number, col, sudoku) {
 	return true;
 }
 
-// given a number, a 3x3 block and a sudoku, returns true if the number can be placed in the block
 //Kiem tra so co bi trung trong khoi khong
 function isPossibleBlock(number, block, sudoku) {
 	for (var i = 0; i <= 8; i++) {
@@ -102,7 +101,6 @@ function isPossibleBlock(number, block, sudoku) {
 	return true;
 }
 
-// given a cell, a number and a sudoku, returns true if the number can be placed in the cell
 // Kiem tra ca 3 dieu kien tren xem so co thoa man khong
 function isPossibleNumber(cell, number, sudoku) {
 	var row = returnRow(cell);
@@ -111,8 +109,7 @@ function isPossibleNumber(cell, number, sudoku) {
 	return isPossibleRow(number, row, sudoku) && isPossibleCol(number, col, sudoku) && isPossibleBlock(number, block, sudoku);
 }
 
-// given a row and a sudoku, returns true if it's a legal row
-//Kiem tra hang da thoa man chua
+//Kiem tra hang ca mot hang cua ma tran da dien co thoa man khong
 function isCorrectRow(row, sudoku) {
 	var rightSequence = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
 	var rowTemp = new Array();
@@ -123,8 +120,7 @@ function isCorrectRow(row, sudoku) {
 	return rowTemp.join() == rightSequence.join();
 }
 
-// given a column and a sudoku, returns true if it's a legal column
-//Kiem tra cot da thoa man chua
+//Kiem tra mot cot dai da thoa man chua
 function isCorrectCol(col, sudoku) {
 	var rightSequence = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
 	var colTemp = new Array();
@@ -135,7 +131,6 @@ function isCorrectCol(col, sudoku) {
 	return colTemp.join() == rightSequence.join();
 }
 
-// given a 3x3 block and a sudoku, returns true if it's a legal block
 //Kiem tra khoi da thoa man chua 
 function isCorrectBlock(block, sudoku) {
 	var rightSequence = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -147,8 +142,8 @@ function isCorrectBlock(block, sudoku) {
 	return blockTemp.join() == rightSequence.join();
 }
 
-// given a sudoku, returns true if the sudoku is solved
 //Tong hop lai 3 dieu kien tren xem ma tran da dien da thoa man chua
+// Ket qua da dung hay chua
 function isSolvedSudoku(sudoku) {
 	for (var i = 0; i <= 8; i++) {
 		if (!isCorrectBlock(i, sudoku) || !isCorrectRow(i, sudoku) || !isCorrectCol(i, sudoku)) {
@@ -158,7 +153,6 @@ function isSolvedSudoku(sudoku) {
 	return true;
 }
 
-// given a cell and a sudoku, returns an array with all possible values we can write in the cell
 // đã cho một ô và một sudoku, trả về một mảng với tất cả các giá trị có thể mà chúng ta có thể 
 // ghi vào ô
 function determinePossibleValues(cell, sudoku) {
@@ -171,14 +165,12 @@ function determinePossibleValues(cell, sudoku) {
 	return possible;
 }
 
-// given an array of possible values assignable to a cell, returns a random value picked from the array
-//given an array of possible values assignable to a cell, returns a random value picked from the array
+//đưa ra một mảng các giá trị có thể có thể gán cho một ô, trả về một giá trị ngẫu nhiên được chọn từ mảng
 function determineRandomPossibleValue(possible, cell) {
 	var randomPicked = Math.floor(Math.random() * possible[cell].length);
 	return possible[cell][randomPicked];
 }
 
-// given a sudoku, returns a two dimension array with all possible values 
 //đã cho một sudoku, trả về một mảng hai chiều với tất cả các giá trị có thể
 function scanSudokuForUnique(sudoku) {
 	var possible = new Array();
@@ -194,7 +186,6 @@ function scanSudokuForUnique(sudoku) {
 	return possible;
 }
 
-// given an array and a number, removes the number from the array
 //đã cho một mảng và một số, xóa số khỏi mảng
 function removeAttempt(attemptArray, number) {
 	var newArray = new Array();
@@ -206,7 +197,6 @@ function removeAttempt(attemptArray, number) {
 	return newArray;
 }
 
-// given a two dimension array of possible values, returns the index of a cell where there are the less possible numbers to choose from
 //đã cho một mảng hai thứ nguyên của các giá trị có thể, trả về chỉ số của một ô nơi có ít số có thể hơn để chọn
 function nextRandom(possible) {
 	var max = 9;
