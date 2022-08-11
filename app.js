@@ -15,19 +15,19 @@ var sudokuApp = new Vue({
 	//Day anh chien thang va that bai vao
     mounted() {
         // Preload image
-        new Image().src = 'fail.gif';
-        new Image().src = 'success.gif';
+        new Image().src = '/src/gif/fail.gif';
+        new Image().src = '/src/gif/success.gif';
     },
 
 	//Bat dau viet ham
     methods: {
-		//Ham Tao Game truyen vao do kho lay tu form index(bien level)
+	//Ham Tao Game truyen vao do kho lay tu form index(bien level)
         initializeGame(level) {
             this.getLevel = level;
             this.mt = generate();
             var defaultSudokuMatrix = this.mt.result;
 
-            // Empty random cells per row //De trong ngau nhien cac o trong 1 hang 
+    // Empty random cells per row //De trong ngau nhien cac o trong 1 hang 
             for (var i = 0; i < defaultSudokuMatrix.length; ++i) {
                 var k = 0;
                 while (k < level) {
@@ -51,7 +51,8 @@ var sudokuApp = new Vue({
             this.isGameStarted = true;
             this.isNewGame = false;
         },
-	//Ham kiem tra dap an da dung chua
+	
+    //Ham kiem tra dap an da dung chua
         evaluateGame() {
             var result = sudoku.map((x, i) => sudoku[i].map(y => parseInt(y.num)));
             var maxtrixCheck = this.sudokuMatrix.map((x, i) => this.sudokuMatrix[i].map(y => parseInt(y.num)));
